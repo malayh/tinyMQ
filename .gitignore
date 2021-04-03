@@ -1,3 +1,6 @@
 venv/
 __pychache__/*
 *.pyc
+dist/
+build/
+*.egg*
