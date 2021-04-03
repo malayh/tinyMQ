@@ -1,0 +1,36 @@
+syntax = "proto2";
+package tinyMQ;
+
+
+message ConnInit {
+    required fixed32    role = 1; // Producer or consumer
+    required string     topic = 2;
+    optional string     auth_token = 3; // will use in future may be
+}
+
+// Sends it as a reply of ConnInit
+message ConnStatus {
+    required fixed32 status = 1;
+}
+
+message ContentWrite {
+    required fixed32    id = 1;
+    required string     topic = 2;
+    required bytes      body = 3;
+}
+
+message Poll {
+    required string topic = 1;
+}
+
+
+message Ack {
+    required fixed32 id = 1;
+    optional fixed32 flags = 2;
+}
+
+message ContentRead {
+    required fixed32    id = 1;
+    required fixed32    status = 2;
+    required bytes      body = 3;
+}
