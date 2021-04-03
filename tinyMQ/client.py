@@ -92,7 +92,7 @@ class Consumer:
 
         self.log.info(f"Topic:{self.topic} : Consumer opened")
 
-    async def poll(self) -> (id,str):
+    async def poll(self) -> (int,str):
         """
         Return Tuple(id,message) or None
         """

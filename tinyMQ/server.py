@@ -18,11 +18,15 @@ class Connection:
         self.role = role
 
 class TinyMQServer:
-    def __init__(self):
+    def __init__(self, logfh : logging.FileHandler = None):
         self.storage : Dict([str,SimpleQueue]) = dict()
         self.producers : Dict([str,List(Connection)]) = dict()
         self.consumers : Dict([str,Connection]) = dict()
         self.log = logging.getLogger("TinyMQServer")
+        self.log.setLevel(logfh.level)
+        
+        if logfh:
+            self.log.addHandler(logfh)
 
     async def handle_incomming_connection(self,ws,path):
         topic = path[1:] # Removing the starting "/"
@@ -70,7 +74,6 @@ class TinyMQServer:
     
     async def read_forever(self,conn:Connection):
         self.log.info(f"Topic:{conn.topic}: Producer connected")
-        self.__log_internals()
 
         # do the reading here
         while True:
@@ -131,11 +134,11 @@ class TinyMQServer:
                     self.log.debug(f"INTERNALS: Topic:{key} Producer:{p}")
 
 
-    async def __start_server(self):
-        server = await websockets.serve(self.handle_incomming_connection,HOST,PORT) # host and port is still global vars
+    async def __start_server(self,host,port):
+        server = await websockets.serve(self.handle_incomming_connection,host,port) # host and port is still global vars
         await server.wait_closed()
 
-    def start(self):
-        asyncio.run(self.__start_server())
+    def start(self, host:str, port:int):
+        asyncio.run(self.__start_server(host,port))
 
 
