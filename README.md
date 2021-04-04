@@ -7,6 +7,7 @@ It uses ProtocolBuffers underneath to pass messages over persistent websockets. 
 - clone this repo
 - Run `python setup.py install` with your virtualenv activated
 - Start the server with `tmqserver --startserver --host localhost --port 9800`
+- Stop the server with `tmqserver --stopserver`
 
 ## Usage
 The client API works using `tinyMQ.Producer` and `tinyMQ.Consumer` classes
