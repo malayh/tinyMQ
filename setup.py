@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 with open("requirements.txt","r") as f:
-    dependencies = f.read().splitlines()
+    dependencies = f.read().split("\n")
 
 setuptools.setup(
     name="tinyMQ",
@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     package_dir={"": "."},
     packages=["tinyMQ"],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=dependencies,
     
     entry_points={
