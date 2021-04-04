@@ -60,7 +60,7 @@ if __name__ == "__main__":
 ```
 
 ## API
-All the messages are stores inside `topics`. A `topic` is created whenever a Consumer or Producers is connected to tinyMQ with a topic name that does not exist yet.
+All the messages are stores inside `topics`. A `topic` is created whenever a Consumer or Producers is connected to tinyMQ with a topic name that does not exist yet. Messages will be deleted from the queue once it is consumed.
 
 ### Client API
 #### `tinyMQ.Producer`
@@ -68,7 +68,7 @@ This class is to be used to write messgess to the queue.
 - `__init__(host: str, port: int , topic: str)`
     - Initialize a connection as a Producer to a tinyMQ instance running on `host` and on `port`. It will write to a topic named `topic` which will be created if doenot exist already
 - `await init_conn()`
-    - This has to be called to make a connection becomes usable.
+    - This has to be called to make a connection usable.
     - Throws `ConnectionRefusedError` if unable to connect
 - `await send(message:str, id:int)`
     - Writes `message` to the topic connected to with id `id`
@@ -79,7 +79,7 @@ This class is used to consumed data from a topic. Only one consumer can consume 
 - `__init__(host: str, port: int , topic: str)`
     - Initialize a connection as a Consumer to a tinyMQ instance running on `host` and on `port`. It will read from a topic named `topic` which will be created if doenot exist already
 - `await init_conn()`
-    - This has to be called to make a connection becomes usable.
+    - This has to be called to make a connection usable.
     - Throws `ConnectionRefusedError` if unable to connect
     - Throws `tinyMQ.InitFailed` if the mentiond topic is already being consumed by some other consumer
 
