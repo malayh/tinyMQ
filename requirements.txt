@@ -1,10 +1,4 @@
-build==0.3.1.post1
 daemonize==2.5.0
-packaging==20.9
-pep517==0.10.0
 protobuf==3.15.6
-pyparsing==2.4.7
 six==1.15.0
-tinyMQ==0.0.1
-toml==0.10.2
 websockets==8.1
